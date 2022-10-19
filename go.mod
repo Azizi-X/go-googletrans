@@ -1,3 +1,3 @@
-module github.com/Conight/go-googletrans
+module github.com/Ericwyn/go-googletrans
 
 go 1.19
