@@ -8,7 +8,7 @@ import (
 func TestTranslator_Translate(t *testing.T) {
 	origin := "你好，世界！"
 	dest := "Hello World!"
-	c := Config{
+	c := TranslateConfig{
 		Proxy:       "http://127.0.0.1:7890",
 		UserAgent:   []string{"Custom Agent"},
 		ServiceUrls: []string{"translate.google.com.hk"},

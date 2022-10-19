@@ -12,19 +12,19 @@ import (
 	"time"
 )
 
-// Config basic config.
-type Config struct {
+// TranslateConfig basic config.
+type TranslateConfig struct {
 	ServiceUrls []string
 	UserAgent   []string
 	Proxy       string
 }
 
-// translated result object.
-type translated struct {
+// TranslateResult result object.
+type TranslateResult struct {
 	Src    string // source language
 	Dest   string // destination language
 	Origin string // original text
-	Text   string // translated text
+	Text   string // TranslateResult text
 }
 
 type sentences struct {
@@ -37,7 +37,7 @@ type sentence struct {
 	Backend int    `json:"backend"`
 }
 
-type translator struct {
+type TranslateApi struct {
 	host   string
 	client *http.Client
 	ta     *tokenAcquirer
@@ -66,9 +66,9 @@ func newAddHeaderTransport(T http.RoundTripper, defaultHeaders map[string]string
 	return &addHeaderTransport{T, defaultHeaders}
 }
 
-func New(config ...Config) *translator {
+func New(config ...TranslateConfig) *TranslateApi {
 	rand.Seed(time.Now().Unix())
-	var c Config
+	var c TranslateConfig
 	if len(config) > 0 {
 		c = config[0]
 	}
@@ -100,7 +100,7 @@ func New(config ...Config) *translator {
 	}
 
 	ta := Token(host, client)
-	return &translator{
+	return &TranslateApi{
 		host:   host,
 		client: client,
 		ta:     ta,
@@ -109,7 +109,7 @@ func New(config ...Config) *translator {
 
 // Translate given content.
 // Set src to `auto` and system will attempt to identify the source language automatically.
-func (a *translator) Translate(origin, src, dest string) (*translated, error) {
+func (a *TranslateApi) Translate(origin, src, dest string) (*TranslateResult, error) {
 	// check src & dest
 	src = strings.ToLower(src)
 	dest = strings.ToLower(dest)
@@ -124,7 +124,7 @@ func (a *translator) Translate(origin, src, dest string) (*translated, error) {
 	if err != nil {
 		return nil, err
 	}
-	result := &translated{
+	result := &TranslateResult{
 		Src:    src,
 		Dest:   dest,
 		Origin: origin,
@@ -133,7 +133,7 @@ func (a *translator) Translate(origin, src, dest string) (*translated, error) {
 	return result, nil
 }
 
-func (a *translator) translate(origin, src, dest string) (string, error) {
+func (a *TranslateApi) translate(origin, src, dest string) (string, error) {
 	tk, err := a.ta.do(origin)
 	if err != nil {
 		return "", err
