@@ -140,7 +140,7 @@ func (a *TranslateApi) translate(origin, src, dest string) (string, error) {
 	}
 
 	// build request
-	client := &http.Client{}
+	client := a.client
 
 	tranUrl := fmt.Sprintf("https://%s/translate_a/single", a.host)
 	req, err := http.NewRequest("GET", tranUrl, nil)
