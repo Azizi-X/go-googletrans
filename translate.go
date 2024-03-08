@@ -44,7 +44,9 @@ type TranslateApi struct {
 }
 
 func randomChoose(slice []string) string {
-	return slice[rand.Intn(len(slice))]
+
+	r := rand.New(rand.NewSource(time.Now().Unix()))
+	return slice[r.Intn(len(slice))]
 }
 
 type addHeaderTransport struct {
@@ -67,7 +69,6 @@ func newAddHeaderTransport(T http.RoundTripper, defaultHeaders map[string]string
 }
 
 func New(config ...TranslateConfig) *TranslateApi {
-	rand.Seed(time.Now().Unix())
 	var c TranslateConfig
 	if len(config) > 0 {
 		c = config[0]
@@ -77,7 +78,7 @@ func New(config ...TranslateConfig) *TranslateApi {
 		c.ServiceUrls = defaultServiceUrls //[]string{"translate.google.com"}
 	}
 	if len(c.UserAgent) == 0 {
-		c.UserAgent = []string{defaultUserAgent}
+		c.UserAgent = defaultUserAgents
 	}
 
 	host := randomChoose(c.ServiceUrls)
