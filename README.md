@@ -1,8 +1,5 @@
 # Googletrans
 
-[![Sourcegraph](https://sourcegraph.com/github.com/Conight/go-googletrans/-/badge.svg)](https://sourcegraph.com/github.com/Conight/go-googletrans?badge)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/Conight/go-googletrans/blob/master/LICENSE)
-
 This is Golang version of [py-googletrans](https://github.com/ssut/py-googletrans).
 
 Googletrans is a **free** and **unlimited** Golang library that implemented Google Translate API.
@@ -10,7 +7,7 @@ This uses the [Google Translate Ajax API from Chrome extensions](https://chrome.
 
 ## Download from Github
 ```shell script
-GO111MODULE=on go get github.com/Conight/go-googletrans
+GO111MODULE=on go get github.com/dreamsxin/go-googletrans
 ```
 
 ## Quick Start Example
@@ -21,7 +18,7 @@ package main
 
 import (
 	"fmt"
-	"github.com/Conight/go-googletrans"
+	"github.com/dreamsxin/go-googletrans"
 )
 
 func main() {
