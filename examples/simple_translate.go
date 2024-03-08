@@ -12,8 +12,8 @@ import (
 var content = `你好，世界！`
 
 func main() {
-	c := translator.Config{
-		Proxy:       "http://127.0.0.1:1087",
+	c := translator.TranslateConfig{
+		//Proxy:       "http://127.0.0.1:1087",
 		UserAgent:   []string{"Custom Agent"},
 		ServiceUrls: []string{"translate.google.com.hk"},
 	}

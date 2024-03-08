@@ -74,7 +74,7 @@ func New(config ...TranslateConfig) *TranslateApi {
 	}
 	// set default value
 	if len(c.ServiceUrls) == 0 {
-		c.ServiceUrls = []string{"translate.google.com"}
+		c.ServiceUrls = defaultServiceUrls //[]string{"translate.google.com"}
 	}
 	if len(c.UserAgent) == 0 {
 		c.UserAgent = []string{defaultUserAgent}
