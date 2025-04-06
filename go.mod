@@ -1,3 +1,3 @@
-module github.com/dreamsxin/go-googletrans
+module github.com/Azizi-X/go-googletrans
 
 go 1.19
