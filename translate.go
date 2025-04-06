@@ -183,7 +183,6 @@ func (a *TranslateApi) translate(origin, src, dest string) (*translation, error)
 			return nil, err
 		}
 
-		fmt.Println(string(body))
 		var sentences sentences
 		err = json.Unmarshal(body, &sentences)
 		if err != nil {
