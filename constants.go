@@ -130,7 +130,7 @@ var defaultServiceUrls = []string{
 	"translate.google.ws",
 }
 
-var languages = map[string]string{
+var Languages = map[string]string{
 	"auto":  "auto",
 	"af":    "afrikaans",
 	"sq":    "albanian",
@@ -240,3 +240,13 @@ var languages = map[string]string{
 	"yo":    "yoruba",
 	"zu":    "zulu",
 }
+
+func reverseMap(m map[string]string) map[string]string {
+	reversed := make(map[string]string, len(m))
+	for k, v := range m {
+		reversed[v] = k
+	}
+	return reversed
+}
+
+var LanguagesReversed = reverseMap(Languages)
