@@ -3,6 +3,7 @@ package translator
 import (
 	"crypto/tls"
 	"encoding/json"
+	"errors"
 	"fmt"
 	"io"
 	"math/rand"
@@ -117,6 +118,9 @@ func New(config ...TranslateConfig) *TranslateApi {
 	}
 }
 
+var ErrDestCode = errors.New("dest language code error")
+var ErrSrcCode = errors.New("src language code error")
+
 // Translate given content.
 // Set src to `auto` and system will attempt to identify the source language automatically.
 func (a *TranslateApi) Translate(origin, src, dest string) (*TranslateResult, error) {
@@ -124,10 +128,10 @@ func (a *TranslateApi) Translate(origin, src, dest string) (*TranslateResult, er
 	src = strings.ToLower(src)
 	dest = strings.ToLower(dest)
 	if _, ok := Languages[src]; !ok {
-		return nil, fmt.Errorf("src language code error")
+		return nil, ErrSrcCode
 	}
 	if val, ok := Languages[dest]; !ok || val == "auto" {
-		return nil, fmt.Errorf("dest language code error")
+		return nil, ErrDestCode
 	}
 
 	parsed, err := a.translate(origin, src, dest)
